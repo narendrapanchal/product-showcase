@@ -4,7 +4,7 @@
 1. Clone the repo
 2. Run `npm install`
 3. Run `npm run dev` or `npm start`
-4. Visit [http://localhost:3000](http://localhost:5173)
+4. Visit [http://localhost:5173](http://localhost:5173)
 
 ## 📸 Screenshots
 
