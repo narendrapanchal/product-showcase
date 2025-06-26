@@ -45,29 +45,31 @@ function ProductDetail() {
   if (!product) return <p className="p-4 text-red-500">Product not found.</p>;
 
   return (
-    <>
-      <div className="p-4 max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full md:w-1/3 h-auto object-contain"
-          />
-          <div className="flex-1">
-            <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
-            <p className="text-lg text-gray-600 mb-2">₹{Math.round(product.price * 80)}</p>
-            <p className="text-yellow-600 mb-2">Rating: {product.rating?.rate} ⭐</p>
-            <p className="mb-4">{product.description}</p>
+    <div className="min-h-screen bg-[#f1f3f6] py-8">
+      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow p-8 flex flex-col md:flex-row gap-8">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-full md:w-1/3 h-auto object-contain bg-[#f5f5f5] rounded p-4"
+        />
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <h1 className="text-2xl font-bold mb-2 text-gray-900">{product.title}</h1>
+            <p className="text-xl text-gray-800 font-semibold mb-2">₹{Math.round(product.price * 80)}</p>
+            <p className="text-yellow-600 mb-2 font-medium">Rating: {product.rating?.rate} <span className="text-yellow-500">⭐</span></p>
+            <p className="mb-4 text-gray-700">{product.description}</p>
+          </div>
+          <div>
             {inCart ? (
               <button
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+                className="bg-[#2874f0] text-white px-6 py-3 rounded font-bold hover:bg-[#1856b8] w-full mt-2"
                 onClick={handleGoToCart}
               >
                 Go to Cart
               </button>
             ) : (
               <button
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full"
+                className="bg-green-600 text-white px-6 py-3 rounded font-bold hover:bg-green-700 w-full mt-2"
                 onClick={handleAddToCart}
               >
                 Add to Cart
@@ -81,7 +83,7 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
