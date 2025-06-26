@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 10;
 const MAX_PRICE = 89999;
-const TOTAL_PAGES=10;
+const TOTAL_PAGES=2;
 
 const parseParams = (params) => {
   let categoryParam = params.get("category") || "All";

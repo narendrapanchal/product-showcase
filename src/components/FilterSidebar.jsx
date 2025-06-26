@@ -69,12 +69,11 @@ const FilterSidebar = ({ maxPrice }) => {
               className={`w-full flex justify-between items-center px-6 py-4 font-semibold text-[#212121] focus:outline-none ${openSection === "Price" ? "bg-[#f1f3f6]" : "bg-white"}`}
               onClick={() => setOpenSection(openSection === "Price" ? null : "Price")}
             >
-              Price
+              Price Range
               <span className={`ml-2 transition-transform ${openSection === "Price" ? "rotate-90" : "rotate-0"}`}>▶</span>
             </button>
             {openSection === "Price" && (
-              <div className="px-6 pb-4">
-                <h3 className="font-semibold text-[#212121] mb-4">Price Range</h3>
+              <div className="px-6 pb-4 mt-2">
                 {maxPrice && maxPrice > 0 ? (
                   <PriceRangeSlider
                     minPrice={MIN_PRICE}
@@ -98,8 +97,7 @@ const FilterSidebar = ({ maxPrice }) => {
               <span className={`ml-2 transition-transform ${openSection === "Category" ? "rotate-90" : "rotate-0"}`}>▶</span>
             </button>
             {openSection === "Category" && (
-              <div className="px-6 pb-4">
-                <h3 className="font-semibold text-[#212121] mb-2">Category</h3>
+              <div className="px-6 pb-4 mt-2">
                 <input
                   type="text"
                   placeholder="Search Category"

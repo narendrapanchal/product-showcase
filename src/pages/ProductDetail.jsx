@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import Loader from '../components/Loader';
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -41,7 +42,7 @@ function ProductDetail() {
     navigate('/cart');
   };
 
-  if (loading) return <p className="p-4">Loading product...</p>;
+  if (loading) return <Loader text="Loading product..." />;
   if (!product) return <p className="p-4 text-red-500">Product not found.</p>;
 
   return (

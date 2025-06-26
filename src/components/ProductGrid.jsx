@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { FilterSortContext } from "../context/FilterSortContext";
 import { Link } from "react-router-dom";
+import Loader from './Loader';
 
 const getRating = (product) => product.rating?.rate || 0;
 
@@ -85,7 +86,7 @@ const ProductGrid = ({ currentPage = 1, productsPerPage = 10  , onTotalPages, se
     // eslint-disable-next-line
   }, [totalPages]);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <Loader text="Loading products..." />;
   if (error) return <div className="text-center text-red-500 py-10">{error}</div>;
   if (!paginated.length) return <div className="text-center py-10">No products found.</div>;
 
