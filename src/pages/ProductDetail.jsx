@@ -1,10 +1,12 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [inCart, setInCart] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -18,6 +20,26 @@ function ProductDetail() {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    if (product) {
+      const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+      setInCart(cart.some((item) => item.id === product.id));
+    }
+  }, [product]);
+
+  const handleAddToCart = () => {
+    const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+    if (!cart.some((item) => item.id === product.id)) {
+      cart.push({ ...product, quantity: 1 });
+      sessionStorage.setItem('cart', JSON.stringify(cart));
+      setInCart(true);
+    }
+  };
+
+  const handleGoToCart = () => {
+    navigate('/cart');
+  };
 
   if (loading) return <p className="p-4">Loading product...</p>;
   if (!product) return <p className="p-4 text-red-500">Product not found.</p>;
@@ -33,15 +55,24 @@ function ProductDetail() {
           />
           <div className="flex-1">
             <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
-            <p className="text-lg text-gray-600 mb-2">₹{product.price}</p>
+            <p className="text-lg text-gray-600 mb-2">₹{Math.round(product.price * 80)}</p>
             <p className="text-yellow-600 mb-2">Rating: {product.rating?.rate} ⭐</p>
             <p className="mb-4">{product.description}</p>
-            <button
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-              onClick={() => alert('Product added to cart! (dummy action)')}
-            >
-              Add to Cart
-            </button>
+            {inCart ? (
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+                onClick={handleGoToCart}
+              >
+                Go to Cart
+              </button>
+            ) : (
+              <button
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
+            )}
             <div className="mt-4">
               <Link to="/" className="text-blue-600 underline text-sm">
                 ← Back to Home

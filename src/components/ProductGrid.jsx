@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { FilterSortContext } from "../context/FilterSortContext";
+import { Link } from "react-router-dom";
 
 const getRating = (product) => product.rating?.rate || 0;
 
@@ -11,7 +12,9 @@ const ProductCard = ({ product }) => (
       <span className="text-blue-600 font-bold text-lg mr-2">₹{Math.round(product.price * 80)}</span>
       <span className="text-xs text-gray-500">({getRating(product)}★)</span>
     </div>
-    <button className="mt-auto bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition">View Details</button>
+    <Link to={`/product/${product.id}`} className="mt-auto">
+      <button className="w-full bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition">View Details</button>
+    </Link>
   </div>
 );
 

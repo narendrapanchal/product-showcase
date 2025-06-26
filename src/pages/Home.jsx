@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-import Header from "../components/Header";
 import FilterSidebar from "../components/FilterSidebar";
 import SortBar from "../components/SortBar";
 import ProductGrid from "../components/ProductGrid";
@@ -95,7 +94,6 @@ const Home = () => {
   return (
     <FilterSortProvider value={filterSortContextValue}>
       <div className="min-h-screen bg-gray-50">
-        <Header />
         <div className="flex mx-auto pt-2">
           {/* Only show sidebar on md+ */}
           <div className="hidden md:flex">
