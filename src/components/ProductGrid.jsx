@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => (
   </div>
 );
 
-const ProductGrid = ({ currentPage = 1, productsPerPage = 10  , onTotalPages, setCategories, setMaxProductPrice }) => {
+const ProductGrid = ({ currentPage = 1, productsPerPage = 10  , onTotalPages, setCategories, setMaxProductPrice, defaultTotalPages }) => {
   const { filters, sort } = useContext(FilterSortContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -72,7 +72,7 @@ const ProductGrid = ({ currentPage = 1, productsPerPage = 10  , onTotalPages, se
   }
 
   // Pagination
-  const totalPages = Math.ceil(filtered.length / productsPerPage) || 1;
+  const totalPages = Math.ceil(filtered.length / productsPerPage) || defaultTotalPages;
   const start = (currentPage - 1) * productsPerPage;
   const paginated = filtered.slice(start, start + productsPerPage);
 

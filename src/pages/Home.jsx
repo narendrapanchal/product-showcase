@@ -9,7 +9,8 @@ import MobileSortFilterBar from "../components/MobileSortFilterBar";
 import { useSearchParams } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 10;
-const HARDCODED_MAX_PRICE = 89999;
+const MAX_PRICE = 89999;
+const TOTAL_PAGES=10;
 
 const parseParams = (params) => {
   let categoryParam = params.get("category") || "All";
@@ -23,7 +24,7 @@ const parseParams = (params) => {
     category,
     price: [
       Number(params.get("minPrice") || 0),
-      Number(params.get("maxPrice") || HARDCODED_MAX_PRICE),
+      Number(params.get("maxPrice") || MAX_PRICE),
     ],
     sort: params.get("sort") || "popularity",
     page: Number(params.get("page") || 1),
@@ -32,7 +33,7 @@ const parseParams = (params) => {
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(TOTAL_PAGES);
   const [categories, setCategories] = useState([]);
 
   // Parse filter/sort/page from URL
@@ -98,12 +99,12 @@ const Home = () => {
         <div className="flex mx-auto pt-2">
           {/* Only show sidebar on md+ */}
           <div className="hidden md:flex">
-            <FilterSidebar maxPrice={HARDCODED_MAX_PRICE} />
+            <FilterSidebar maxPrice={MAX_PRICE} />
           </div>
           <main className="flex-1 px-2 md:px-6">
             {/* Only show MobileSortFilterBar (and thus MobileFilterPopup) on mobile */}
             <div className="mb-2 md:hidden">
-              <MobileSortFilterBar maxPrice={HARDCODED_MAX_PRICE} />
+              <MobileSortFilterBar maxPrice={MAX_PRICE} />
             </div>
             <SortBar />
             <ProductGrid
@@ -111,6 +112,7 @@ const Home = () => {
               productsPerPage={PRODUCTS_PER_PAGE}
               onTotalPages={setTotalPages}
               setCategories={setCategories}
+              defaultTotalPages={totalPages}
             />
             <Pagination
               currentPage={page}
