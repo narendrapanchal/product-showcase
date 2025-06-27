@@ -47,7 +47,8 @@
 ## 📦 Mock API
 - https://fakestoreapi.com
 
-## 🔗 [Live Demo](https://product-showcase-s3fi.onrender.com/).
+## 🔗 Live Demo.
+- [https://product-showcase-s3fi.onrender.com/](https://product-showcase-s3fi.onrender.com/)
 
 ## 🧠 Developer
 - Narendra Panchal ([@narendrapanchal](https://github.com/narendrapanchal))
